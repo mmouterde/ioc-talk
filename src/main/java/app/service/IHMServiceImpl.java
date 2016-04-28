@@ -6,11 +6,9 @@ import javafx.scene.layout.Pane;
 
 public class IHMServiceImpl {
 
-    private final String backgroundImg;
     private final DrawMatrixServiceImpl matrixDrawer;
 
-    public IHMServiceImpl(DrawMatrixServiceImpl matrixDrawer, String backgroundImg) {
-        this.backgroundImg = backgroundImg;
+    public IHMServiceImpl(DrawMatrixServiceImpl matrixDrawer) {
         this.matrixDrawer = matrixDrawer;
     }
 
@@ -23,7 +21,7 @@ public class IHMServiceImpl {
 
     public Pane draw(double[][] matrix) {
         Pane pane = new Pane();
-        pane.getChildren().add(drawImage(backgroundImg));
+        pane.getChildren().add(drawImage("file:src/main/resources/rhino-silhouette-clipart2.png"));
         pane.getChildren().add(matrixDrawer.drawMatrix(matrix));
         return pane;
     }

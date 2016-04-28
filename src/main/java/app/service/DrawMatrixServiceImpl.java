@@ -10,19 +10,17 @@ import javafx.scene.paint.Color;
  */
 public class DrawMatrixServiceImpl {
 
-    private final int canvasWidth;
-    private final int matrixSize;
-    private final int matrixByRow;
+    private final int canvasWidth = 600;
+    private final int matrixSize = (int) Math.sqrt(25);
+    private final int matrixByRow = 5;
     private final int rectangleSize;
 
     private Canvas canvas;
     private int nbMatrix = 0;
 
-    public DrawMatrixServiceImpl(int canvasWidth, int nbPersonne, int matrixSize) {
-        this.canvasWidth = canvasWidth;
-        this.matrixByRow = (int) Math.sqrt(nbPersonne);
-        this.matrixSize = matrixSize;
-        this.rectangleSize = (int) Math.round((Math.sqrt((canvasWidth * canvasWidth) / nbPersonne) / matrixSize));
+
+    public DrawMatrixServiceImpl() {
+        this.rectangleSize = (int) Math.round((Math.sqrt((canvasWidth * canvasWidth) / 25) / matrixSize));
     }
 
     private void drawRectange(Canvas canvas, int x, int y, double value) {

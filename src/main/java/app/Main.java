@@ -16,19 +16,19 @@ public class Main extends Application {
     private MatrixProducerServiceImpl matrixProducerService;
 
     public Main() {
-        matrixDrawer = new DrawMatrixServiceImpl(600, 25, 5);
-        ihmService = new IHMServiceImpl(matrixDrawer, "file:src/main/resources/rhino-silhouette-clipart2.png");
+        matrixDrawer = new DrawMatrixServiceImpl();
+        ihmService = new IHMServiceImpl(matrixDrawer);
         matrixProducerService = new MatrixProducerServiceImpl();
     }
 
     public Pane functionnalBoostrap() {
-        return ihmService.draw(matrixProducerService.getMatrix("data"));
+        return ihmService.draw(matrixProducerService.getMatrix());
     }
 
     @Override
     public void start(final Stage stage) throws Exception {
         Group root = new Group();
-        root.getChildren().add(functionnalBoostrap());
+        root.getChildren().add(new Main().functionnalBoostrap());
         stage.setScene(new Scene(root));
         stage.setWidth(610);
         stage.setHeight(640);

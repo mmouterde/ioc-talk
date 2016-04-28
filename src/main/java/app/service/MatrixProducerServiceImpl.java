@@ -2,12 +2,11 @@ package app.service;
 
 public class MatrixProducerServiceImpl {
     /**
-     * Produce a 5x5 matrix of double from a string
+     * Produce a 5x5 matrix of double
      *
-     * @param data
      * @return 5x5 matrix of double in [0,1]
      */
-    public double[][] getMatrix(String data) {
+    public double[][] getMatrix() {
         double[][] matrix = {
                 {1.0, 0.5, 0.75, 0, 0.3},
                 {0.5, 1, 0.75, 0.63, 0.25},
