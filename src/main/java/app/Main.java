@@ -1,34 +1,30 @@
 package app;
 
-import app.service.DrawMatrixServiceImpl;
-import app.service.IHMServiceImpl;
-import app.service.MatrixProducerServiceImpl;
+import app.service.IHMService;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import net.mixioc.ServiceManager;
+import net.mixioc.annotation.Inject;
 
 public class Main extends Application {
 
-    private DrawMatrixServiceImpl matrixDrawer;
-    private IHMServiceImpl ihmService;
-    private MatrixProducerServiceImpl matrixProducerService;
+    @Inject
+    private IHMService ihmService;
 
     public Main() {
-        matrixDrawer = new DrawMatrixServiceImpl(600, 25, 5);
-        ihmService = new IHMServiceImpl(matrixDrawer, "file:src/main/resources/rhino-silhouette-clipart2.png");
-        matrixProducerService = new MatrixProducerServiceImpl();
     }
 
     public Pane functionnalBoostrap() {
-        return ihmService.draw(matrixProducerService.getMatrix("data"));
+        return ihmService.draw();
     }
 
     @Override
     public void start(final Stage stage) throws Exception {
         Group root = new Group();
-        root.getChildren().add(functionnalBoostrap());
+        root.getChildren().add(new Main().functionnalBoostrap());
         stage.setScene(new Scene(root));
         stage.setWidth(610);
         stage.setHeight(640);
@@ -37,6 +33,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        ServiceManager.init("app");
         launch(args);
     }
 

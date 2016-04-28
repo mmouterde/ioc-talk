@@ -3,9 +3,9 @@ package app.service;
 import net.mixioc.annotation.Service;
 
 @Service
-public class MatrixProducerServiceImpl implements MatrixProducerService {
+public class MatrixProducerServiceImpl2 implements MatrixProducerService {
 
-    public MatrixProducerServiceImpl() {
+    public MatrixProducerServiceImpl2() {
     }
 
     /**
@@ -16,7 +16,7 @@ public class MatrixProducerServiceImpl implements MatrixProducerService {
     @Override
     public double[][] getMatrix() {
         double[][] matrix = {
-                {1.0, 0.5, 0.75, 0, 0.3},
+                {1.0, 0.5, 0.75, 1, 0.3},
                 {0.5, 1, 0.75, 0.63, 0.25},
                 {0.33, 0.76, 0.9, 0.12, 0.6},
                 {0.67, 0.1, 0.7, 0.83, 0.99},

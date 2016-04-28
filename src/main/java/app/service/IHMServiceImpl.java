@@ -1,17 +1,22 @@
 package app.service;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import net.mixioc.annotation.Inject;
+import net.mixioc.annotation.Service;
 
-public class IHMServiceImpl {
+@Service
+public class IHMServiceImpl implements IHMService {
 
-    private final String backgroundImg;
-    private final DrawMatrixServiceImpl matrixDrawer;
+    @Inject
+    private DrawMatrixService matrixDrawer;
 
-    public IHMServiceImpl(DrawMatrixServiceImpl matrixDrawer, String backgroundImg) {
-        this.backgroundImg = backgroundImg;
-        this.matrixDrawer = matrixDrawer;
+    @Inject
+    private Iterable<MatrixProducerService> matrixProducerServices;
+
+    public IHMServiceImpl() {
     }
 
     private ImageView drawImage(String url) {
@@ -21,10 +26,17 @@ public class IHMServiceImpl {
         return iv2;
     }
 
-    public Pane draw(double[][] matrix) {
+    public Pane draw() {
         Pane pane = new Pane();
-        pane.getChildren().add(drawImage(backgroundImg));
-        pane.getChildren().add(matrixDrawer.drawMatrix(matrix));
+        pane.getChildren().add(drawImage("file:src/main/resources/rhino-silhouette-clipart2.png"));
+        boolean firstLoop = true;
+        for (MatrixProducerService producer : matrixProducerServices) {
+            Canvas firstCanvas = matrixDrawer.drawMatrix(producer.getMatrix());
+            if (firstLoop) {
+                pane.getChildren().add(firstCanvas);
+            }
+            firstLoop = false;
+        }
         return pane;
     }
 

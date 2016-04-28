@@ -3,26 +3,26 @@ package app.service;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import net.mixioc.annotation.Service;
 
 /*
  * Cette classe est responsable de l'affichage de plusieurs matrices sous forme d'un carrer
  * Sa méthode drawMatrix peut être appelée plusieurs fois pour remplir le canvas
  */
-public class DrawMatrixServiceImpl {
+@Service
+public class DrawMatrixServiceImpl implements DrawMatrixService {
 
-    private final int canvasWidth;
-    private final int matrixSize;
-    private final int matrixByRow;
+    private final int canvasWidth = 600;
+    private final int matrixSize = (int) Math.sqrt(25);
+    private final int matrixByRow = 5;
     private final int rectangleSize;
 
     private Canvas canvas;
     private int nbMatrix = 0;
 
-    public DrawMatrixServiceImpl(int canvasWidth, int nbPersonne, int matrixSize) {
-        this.canvasWidth = canvasWidth;
-        this.matrixByRow = (int) Math.sqrt(nbPersonne);
-        this.matrixSize = matrixSize;
-        this.rectangleSize = (int) Math.round((Math.sqrt((canvasWidth * canvasWidth) / nbPersonne) / matrixSize));
+
+    public DrawMatrixServiceImpl() {
+        this.rectangleSize = (int) Math.round((Math.sqrt((canvasWidth * canvasWidth) / 25) / matrixSize));
     }
 
     private void drawRectange(Canvas canvas, int x, int y, double value) {
@@ -41,6 +41,7 @@ public class DrawMatrixServiceImpl {
         }
     }
 
+    @Override
     public Canvas drawMatrix(double[][] matrix) {
         if (canvas == null) {
             canvas = new Canvas(canvasWidth, canvasWidth);
